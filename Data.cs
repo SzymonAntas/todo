@@ -58,7 +58,7 @@ namespace Todo
 
                 for (var index = 0; index < Tasks.Count; index++)
                 {
-                    var assignees = new StringBuilder().AppendJoin(",", Tasks[index].Assignees);;
+                    var assignees = new StringBuilder().AppendJoin(",", Tasks[index].Assignees);
                     var tags = new StringBuilder().AppendJoin(",", Tasks[index].Tags);
                     writer.WriteLine($"{index} | {Tasks[index].Name} | {(int)Tasks[index].Status} | {Tasks[index].DueDate} | {Tasks[index].Priority} | {assignees} | {tags}");
                 }

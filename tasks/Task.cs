@@ -22,7 +22,7 @@ namespace Todo.Tasks
             Status = status;
         }
 
-        public void ChangeName(string name)
+        public void Rename(string name)
         {
             Name = name;
         }

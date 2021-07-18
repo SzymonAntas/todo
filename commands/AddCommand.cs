@@ -7,16 +7,16 @@ namespace Todo.Commands
 {
     internal class AddCommand : ICommand
     {
-        public void Execute(string[] args, ref List<Task> tasks)
+     public void Execute(string[] args, ref List<Task> tasks)
         {
             const string assignPerson = "@", setPriority = "!", setDueDate = "_", addTag = "#";
 
             if (args.Length == 0)
             {
-                Console.WriteLine("Invalid argument.");
+                Console.WriteLine("Invalid arguments.");
                 return;
             }
-            
+
             var taskName = new StringBuilder();
             var assignees = new List<string>();
             var tags = new List<string>();
