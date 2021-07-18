@@ -69,7 +69,9 @@ namespace Todo
                 case var c when c.Equals("remove", StringComparison.InvariantCultureIgnoreCase):
                     context.SetCommand(new RemoveCommand());
                     break;
-                
+                case var c when c.Equals("list", StringComparison.InvariantCultureIgnoreCase):
+                    context.SetCommand(new ListCommand());
+                    break;
                 default:
                     Console.WriteLine($"Invalid Command \"{commandName}\".");
                     return;

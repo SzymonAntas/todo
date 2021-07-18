@@ -30,11 +30,12 @@ namespace Todo
                     var elements = line.Split(" | ");
                     var assignees = new List<string>(elements[4].Split(","));
                     var tags = new List<string>(elements[5].Split(","));
+                    DateTime? due = null;
 
                     if (!int.TryParse(elements[3], out var priority)) throw new Exception("Priority Error");
-                    if (!DateTime.TryParse(elements[2], out var dueDate)) throw new Exception("Date Error");
+                    if (DateTime.TryParse(elements[2], out var dueDate)) due = dueDate;
                     
-                    Tasks.Add(new Task(elements[1], dueDate, priority, assignees, tags));
+                    Tasks.Add(new Task(elements[1], due, priority, assignees, tags));
                     
                     line = reader.ReadLine();
                 }
