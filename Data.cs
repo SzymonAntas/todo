@@ -25,17 +25,19 @@ namespace Todo
 
                 while (line != null)
                 {
-                    //"{index} | {tasks[index].Name} | {tasks[index].DueDate} | {tasks[index].Priority} | {assignees} | {tags}");
+                    //"{ID} | {NAME} | {STATUS} |  {DUE_DATE} | {PRIORITY} | {assignees} | {tags}");
 
                     var elements = line.Split(" | ");
-                    var assignees = new List<string>(elements[4].Split(","));
-                    var tags = new List<string>(elements[5].Split(","));
+                    var assignees = new List<string>(elements[5].Split(","));
+                    var tags = new List<string>(elements[6].Split(","));
                     DateTime? due = null;
+                    if (!int.TryParse(elements[2], out var value)) throw new Exception("Status Error");
+                    var status = (TaskStatus)value;
 
-                    if (!int.TryParse(elements[3], out var priority)) throw new Exception("Priority Error");
-                    if (DateTime.TryParse(elements[2], out var dueDate)) due = dueDate;
+                    if (!int.TryParse(elements[4], out var priority)) throw new Exception("Priority Error");
+                    if (DateTime.TryParse(elements[3], out var dueDate)) due = dueDate;
                     
-                    Tasks.Add(new Task(elements[1], due, priority, assignees, tags));
+                    Tasks.Add(new Task(elements[1], status, due, priority, assignees, tags));
                     
                     line = reader.ReadLine();
                 }
@@ -58,7 +60,7 @@ namespace Todo
                 {
                     var assignees = new StringBuilder().AppendJoin(",", Tasks[index].Assignees);;
                     var tags = new StringBuilder().AppendJoin(",", Tasks[index].Tags);
-                    writer.WriteLine($"{index} | {Tasks[index].Name} | {Tasks[index].DueDate} | {Tasks[index].Priority} | {assignees} | {tags}");
+                    writer.WriteLine($"{index} | {Tasks[index].Name} | {(int)Tasks[index].Status} | {Tasks[index].DueDate} | {Tasks[index].Priority} | {assignees} | {tags}");
                 }
             }
             catch (Exception e)

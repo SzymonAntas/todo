@@ -10,7 +10,7 @@ namespace Todo.Commands
         {
             try
             {
-                if (int.TryParse(args[0], out var id)) throw new Exception();
+                if (!int.TryParse(args[0], out var id)) throw new Exception();
                 if (id >= tasks.Count) throw new Exception();
 
                 tasks[id].ChangeStatus(TaskStatus.Todo);

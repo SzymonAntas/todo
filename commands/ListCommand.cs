@@ -10,8 +10,13 @@ namespace Todo.Commands
     {
         public void Execute(string[] args, ref List<Task> tasks)
         {
-            // done
-            // !done
+            // done & !done
+            if (tasks.Count == 0)
+            {
+                Console.WriteLine("Task list is empty.");
+                return;
+            }
+            
             for (var i = 0; i < tasks.Count; i++)
             {
                 var task = tasks[i];
@@ -32,8 +37,12 @@ namespace Todo.Commands
 
                 var due = task.DueDate != null ? task.DueDate.ToString()! : "unknown";
 
-                Console.WriteLine(
-                    $"{i}. {task.Name}, due: {due}, priority: {task.Priority}, assigned to: {assignees}, tags: {tags}");
+                Console.WriteLine("\n- - -");
+                Console.WriteLine($"{i}. [{task.Status.ToString().ToUpper()}] \"{task.Name}\"");
+                Console.WriteLine($"due: {due}");
+                Console.WriteLine($"priority: {task.Priority}");
+                Console.WriteLine($"assigned to: {assignees}");
+                Console.WriteLine($"tags: {tags}\n");
             }
             
             // TODO: overdue, !overdue

@@ -12,14 +12,14 @@ namespace Todo.Tasks
         public List<string> Tags { get; }
         public TaskStatus Status { get; private set; }
         
-        public Task(string taskName, DateTime? dueDate, int priority, List<string> assignees, List<string> tags)
+        public Task(string taskName, TaskStatus status, DateTime? dueDate, int priority, List<string> assignees, List<string> tags)
         {
             Name = taskName;
             DueDate = dueDate;
             Priority = priority;
             Assignees = assignees;
             Tags = tags;
-            Status = TaskStatus.Todo;
+            Status = status;
         }
 
         public void ChangeName(string name)

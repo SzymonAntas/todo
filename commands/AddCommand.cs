@@ -68,7 +68,7 @@ namespace Todo.Commands
                     catch (Exception)
                     {
                         Console.WriteLine("Wrong due date format. Use YYYY-MM-DD,HH:mm.");
-                        break;
+                        return;
                     }
                 }
 
@@ -78,7 +78,7 @@ namespace Todo.Commands
                 }
             }
 
-            var task = new Task(taskName.ToString().TrimEnd(), dueDate, priority, assignees, tags);
+            var task = new Task(taskName.ToString().TrimEnd(), TaskStatus.Todo, dueDate, priority, assignees, tags);
             tasks.Add(task);
 
             var message = new StringBuilder();

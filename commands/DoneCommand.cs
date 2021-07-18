@@ -10,16 +10,16 @@ namespace Todo.Commands
         {
             try
             {
-                if (int.TryParse(args[0], out var id)) throw new Exception();
-                if (id >= tasks.Count) throw new Exception();
+                if (!int.TryParse(args[0], out var id)) throw new Exception("ID not a number.");
+                if (id >= tasks.Count) throw new Exception("ID too big.");
 
                 tasks[id].ChangeStatus(TaskStatus.Done);
 
-                Console.WriteLine($"Task \"{tasks[id].Name}\" (id:{id}) has been finished.");
+                Console.WriteLine($"Task \"{tasks[id].Name}\" (id:{id}) has been finished. Current status: {tasks[id].Status.ToString().ToUpper()}");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine("Task not found.");
+                Console.WriteLine($"Task not found. {e.Message}");
             }
         }
     }
