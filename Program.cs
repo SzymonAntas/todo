@@ -1,6 +1,6 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using Todo.Commands;
-using Todo.Tasks;
 
 /* COMMAND FORMAT:
          * todo add Ask what to do now @JohnDoe _2020-07-18,12:22 !1 #management #hierarchy
@@ -43,8 +43,11 @@ namespace Todo
                 Console.WriteLine("Missing command.");
                 return;
             }
-            
+
+            var data = new Data();
             var context = new Context();
+            
+            data.LoadState();
 
             var commandName = args[0];
             var commandArgs = args[1..];
@@ -72,7 +75,9 @@ namespace Todo
                     return;
             }
             
-            context.HandleCommand(commandArgs);
+            context.HandleCommand(commandArgs, ref data.Tasks);
+
+            data.SaveState();
             
             #if DEBUG
             Console.ReadKey();
