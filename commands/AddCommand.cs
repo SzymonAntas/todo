@@ -10,6 +10,12 @@ namespace Todo.Commands
         public void Execute(string[] args, ref List<Task> tasks)
         {
             const string assignPerson = "@", setPriority = "!", setDueDate = "_", addTag = "#";
+
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Invalid argument.");
+                return;
+            }
             
             var taskName = new StringBuilder();
             var assignees = new List<string>();
@@ -68,11 +74,26 @@ namespace Todo.Commands
 
                 else
                 {
-                    taskName.Append(arg);
+                    taskName.Append($"{arg} ");
                 }
             }
+
+            var task = new Task(taskName.ToString().TrimEnd(), dueDate, priority, assignees, tags);
+            tasks.Add(task);
+
+            var message = new StringBuilder();
             
-            tasks.Add(new Task(taskName.ToString(), dueDate, priority, assignees, tags));
+            message.Append($"Added a new task \"{task.Name}\" ");
+            message.Append($"(id: {tasks.Count - 1})");
+            if (task.DueDate != null) message.Append($" due {task.DueDate.ToString()}");
+            if (task.Assignees.Count > 0) message.Append(", assigned to:");
+            foreach (var assignee in task.Assignees)
+            {
+                message.Append($" {assignee},");
+            }
+            message.Append($" with priority level {task.Priority}");
+
+            Console.WriteLine(message.ToString());
         }
     }
 }
