@@ -10,15 +10,19 @@ All commands are called from command line. You should either call them from with
 `todo add <task name with spaces> [_YYYY-MM-DD,HH:mm (due date)] [@assignee] [!number (priority)] [#tag]`
 
 **LIST** - displays all tasks. Uses simple filters (`done`, `!done`).
+
 `todo list [filter]`
 
 **DONE** - marks task as done. Does not remove it.
+
 `todo done <id>`
 
 **REOPEN** - marks task as todo.
+
 `todo reopen <id>`
 
 **REMOVE** - removes task completely from the list.
+
 `todo remove <id>`
 
 ### Tips
@@ -26,5 +30,7 @@ Remember that the id on the task list is dynamic (i.e. when you remove task with
 
 ## Roadmap
 1.0 - Working Task List
+
 1.1 - Proper Filtering Update
+
 1.2 - Assigned People Update
