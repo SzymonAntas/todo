@@ -78,6 +78,12 @@ namespace Todo.Commands
                 }
             }
 
+            if (taskName.ToString().Equals(string.Empty))
+            {
+                Console.WriteLine("Missing task name.");
+                return;
+            }
+
             var task = new Task(taskName.ToString().TrimEnd(), TaskStatus.Todo, dueDate, priority, assignees, tags);
             tasks.Add(task);
 
